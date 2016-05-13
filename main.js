@@ -1,11 +1,11 @@
 ﻿// "layer_selector" plugin, main module
 
-// Plugins should load their own versions of any libraries used even if those libraries are also used 
-// by the GeositeFramework, in case a future framework version uses a different library version. 
+// Plugins should load their own versions of any libraries used even if those libraries are also used
+// by the GeositeFramework, in case a future framework version uses a different library version.
 
 require({
     // Specify library locations.
-    // The calls to location.pathname.replace() below prepend the app's root path to the specified library location. 
+    // The calls to location.pathname.replace() below prepend the app's root path to the specified library location.
     // Otherwise, since Dojo is loaded from a CDN, it will prepend the CDN server path and fail, as described in
     // https://dojotoolkit.org/documentation/tutorials/1.7/cdn
     packages: [
@@ -28,11 +28,6 @@ require({
             name: "jquery.placeholder",
             location: location.pathname.replace(/\/[^/]+$/, "") + "plugins/layer_selector/lib",
             main: "jquery.placeholder.amd.min"
-        },
-        {
-            name: "tv4",
-            location: location.pathname.replace(/\/[^/]+$/, "") + "plugins/layer_selector/lib",
-            main: "tv4.min"
         }
     ]
 });
@@ -68,7 +63,7 @@ define([
 
                 // If the layer exists and we are re-initializing, make sure no layers
                 // remain from the previous instance
-                if (this._layerManager) { 
+                if (this._layerManager) {
                     this._layerManager.hideAllLayers();
                     delete this._layerManager;
                 }
@@ -96,7 +91,7 @@ define([
                         self._layerManager.setServiceState(self._currentState, self.map);
                     }
 
-                    // Only render the tree when the local version is also the instance 
+                    // Only render the tree when the local version is also the instance
                     // version.  This ignores earlier initializations if they haven't completed
                     // yet.
                     if (ui.instanceId == self._ui.instanceId) {
@@ -112,7 +107,7 @@ define([
                 // Load layer sources, then render UI passing the tree of layer nodes
                 var self = this,
                     region = currentRegion || 'main';
-                    
+
                 this._layerManager.load(this.getLayersJson(), region, onLoaded);
 
             },
@@ -163,11 +158,11 @@ define([
                 this._ui.uncheckAndCollapse();
                 this._currentState = {};
             }, 600, true),
-            
+
             subregionActivated: function(subregion) {
                 this.initialize(null, subregion.id);
             },
-            
+
             subregionDeactivated: function(subregion) {
                 this.clearAll();
                 this.initialize(null, 'main');
@@ -175,7 +170,7 @@ define([
 
             beforePrint: function(printDeferred) {
                 // We can short circuit the plugin print chain by simply
-                // rejecting this deferred object.  
+                // rejecting this deferred object.
                 printDeferred.reject();
 
                 // Trigger an export dialog for this pane.
